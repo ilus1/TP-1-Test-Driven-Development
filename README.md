@@ -4,9 +4,9 @@ TPPE - Técnicas de Programação para Plataformas Emergentes
 
 ### Trabalho Prático 1 - _Test-Driven Development
 
-|Foto|Matrícula | Aluno |
-| :--:| :--: | :--: |
-|https://github.com/AntonioAldisio.png| 20/2028211 |  [Antônio Aldísio](https://github.com/AntonioAldisio/) |
+|Matrícula | Aluno |
+| :--: | :--: |
+| 20/2028211 |  [Antônio Aldísio](https://github.com/AntonioAldisio/) |
 
 
 
