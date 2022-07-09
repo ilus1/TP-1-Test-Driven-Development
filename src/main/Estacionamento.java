@@ -1,5 +1,8 @@
 package main;
 
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+
 public class Estacionamento {
 	
 	private Float valorfracao;
@@ -30,9 +33,13 @@ public class Estacionamento {
 	}
 
 
-	public float calculafracoes(String entrada, String saida) {
-		return 2*this.valorfracao;
+	public float calculafracoes(String tempoPermanencia) {
+		String[] entradaSaida = tempoPermanencia.split(";");
+		LocalTime entrada = LocalTime.parse(entradaSaida[0]);
+		LocalTime saida = LocalTime.parse(entradaSaida[1]);
+
+		long tempoCorrido = ChronoUnit.MINUTES.between(entrada, saida);
+		if (tempoCorrido > 0) return (tempoCorrido / 15) * this.valorfracao;
+		else return 0f;
 	}
-
-
 }
