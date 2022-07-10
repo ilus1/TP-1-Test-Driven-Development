@@ -32,7 +32,7 @@ public class Estacionamento {
 		this.horarioFechamento = horarioFechamento;
 	}
 	
-	public long calculaDiferenca(String tempoPermanencia) {
+	public long calculaDiferencaMinutos(String tempoPermanencia) {
 		String[] entradaSaida = tempoPermanencia.split(";");
 		LocalTime entrada = LocalTime.parse(entradaSaida[0]);
 		LocalTime saida = LocalTime.parse(entradaSaida[1]);
@@ -40,15 +40,21 @@ public class Estacionamento {
 		return ChronoUnit.MINUTES.between(entrada, saida);
 	}
 
-
 	public float calculafracoes(String tempoPermanencia) {
-		long tempoCorrido = calculaDiferenca(tempoPermanencia);
+		long tempoCorrido = calculaDiferencaMinutos(tempoPermanencia);
 		if (tempoCorrido > 0) return (tempoCorrido / 15) * this.valorfracao;
 		else return 0f;
 	}
 
-
 	public Float calculaHorasCheias(String tempoPermanencia) {
-		return 2 * 4 * this.valorfracao * (1 - this.descontoHoraCheia);
+		long tempoCorrido = calculaDiferencaMinutos(tempoPermanencia);
+
+		if (tempoCorrido > 0) {
+			long horas = (int) tempoCorrido / 60;
+			return horas * 4 * this.valorfracao * (1 - this.descontoHoraCheia);
+		} else {
+			long horas = (int) 24 + tempoCorrido / 60;
+			return horas * 4 * this.valorfracao * (1 - this.descontoHoraCheia);
+		}
 	}
 }
